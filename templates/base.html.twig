@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Test Symfony{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+     {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    {% macro newLine(invoiceLinesField) %}
+         <div class="row">
+            <div class="col-12 col-sm-4">
+                {{ form_row(invoiceLinesField.description) }}
+            </div>
+            <div class="col-12 col-sm-4">
+                {{ form_row(invoiceLinesField.amount, { 'attr' : {'onblur' : "calcular()"}}) }}
+            </div>
+            <div class="col-12 col-sm-4">
+                {{ form_row(invoiceLinesField.quantity,  { 'attr' : {'onblur' : "calcular()"}}) }}
+            </div>
+            <div class="col-12 mt-2 col-sm- text-left">
+                {{ form_row(invoiceLinesField.vatAmount) }}
+                <hr>
+            </div>
+            <div class="col-12 col-sm- text-left">
+                {{ form_row(invoiceLinesField.total) }}
+                <hr>
+            </div>
+        </div>
+    {% endmacro %}
+        {% block body %}{% endblock %}
+       
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+   <script src="{{ asset('js/addRemoveLines.js') }}"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,84 @@
+-- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
+--
+-- Host: localhost    Database: test_symfony
+-- ------------------------------------------------------
+-- Server version	8.0.28-0ubuntu0.20.04.3
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `invoice`
+--
+
+DROP TABLE IF EXISTS `invoice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `invoice` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `customer_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `invoice`
+--
+
+LOCK TABLES `invoice` WRITE;
+/*!40000 ALTER TABLE `invoice` DISABLE KEYS */;
+INSERT INTO `invoice` VALUES (1,'2022-04-10 00:00:00','23456',324567),(2,'2022-04-10 00:00:00','23456',324567),(3,'2022-04-10 00:00:00','245678',3456546),(4,'2022-04-10 00:00:00','12345',0),(5,'2022-04-10 00:00:00','12345',0),(6,'2022-04-10 00:00:00','12345',0),(7,'2022-04-10 00:00:00','7597',0),(8,'2022-04-10 00:00:00','7597',0),(9,'2022-04-10 00:00:00','7597',0),(10,'2022-04-10 00:00:00','7597',0),(11,'2022-04-10 00:00:00','7597',0),(12,'2022-04-10 00:00:00','456',567),(13,'2022-04-10 00:00:00','456',567),(14,'2022-04-10 00:00:00','456',567),(15,'2022-04-10 00:00:00','456',567),(16,'2022-04-10 00:00:00','6767',987),(17,'2022-04-10 00:00:00','6767',977);
+/*!40000 ALTER TABLE `invoice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `invoice_lines`
+--
+
+DROP TABLE IF EXISTS `invoice_lines`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `invoice_lines` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `invoice_id` int DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` int NOT NULL,
+  `amount` decimal(12,2) NOT NULL,
+  `vat_amount` decimal(12,2) NOT NULL,
+  `total` decimal(12,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_72DBDC232989F1FD` (`invoice_id`),
+  CONSTRAINT `FK_72DBDC232989F1FD` FOREIGN KEY (`invoice_id`) REFERENCES `invoice` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `invoice_lines`
+--
+
+LOCK TABLES `invoice_lines` WRITE;
+/*!40000 ALTER TABLE `invoice_lines` DISABLE KEYS */;
+INSERT INTO `invoice_lines` VALUES (1,1,'255',1000,12.00,2160.00,14160.00),(2,2,'Banane',1000,12.00,2160.00,14160.00),(3,2,'Orange',120,125.00,2700.00,17700.00),(4,3,'Banane',12,100.00,216.00,1416.00),(5,3,'Orange',100,145.00,2610.00,17110.00),(6,4,'Pencil',45676,125.00,1027710.00,6737210.00),(7,4,'Bic',123,100.00,2214.00,14514.00),(8,5,'Pencil',45676,125.00,1027710.00,6737210.00),(9,5,'Bic',123,100.00,2214.00,14514.00),(10,6,'Pencil',45676,125.00,1027710.00,6737210.00),(11,6,'Bic',123,100.00,2214.00,14514.00),(12,7,'Crips',90,12.00,194.40,1274.40),(13,8,'Crips',90,12.00,194.40,1274.40),(14,9,'Crips',90,12.00,194.40,1274.40),(15,10,'Crips',90,12.00,194.40,1274.40),(16,11,'Crips',90,188.00,3045.60,19965.60),(17,12,'34567',3456,4567.00,2841039.36,18624591.36),(18,13,'34567',3456,4567.00,2841039.36,18624591.36),(19,14,'34567',3456,4567.00,2841039.36,18624591.36),(20,15,'34567',3456,4567.00,2841039.36,18624591.36),(21,16,'Crips',10,230.00,414.00,2714.00),(22,17,'Crips',10,2300.00,4140.00,27140.00);
+/*!40000 ALTER TABLE `invoice_lines` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-04-10  1:31:54
